@@ -64,7 +64,7 @@ router.put('/:id', function(req, res, next) {
       return next(err);
     }
 
-    post.name = req.body.name,
+    //post.name = req.body.name,
     post.title = req.body.title;
     post.city = req.body.city;
     post.address = req.body.address;
@@ -91,7 +91,7 @@ router.put('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
    var newPost = new Post({
     read : req.body.read,
-    name: req.body.name,
+    //name: req.body.name,
     title : req.body.title,
     city : req.body.city,
     address : req.body.address,

@@ -1,4 +1,4 @@
-var express = require('express')
+var express = require('express'),
     User = require('../models/User');
 var router = express.Router();
 
@@ -24,7 +24,7 @@ router.post('/signin', function(req, res, next) {
     } else {
       req.session.user = user;
       req.flash('success', '로그인 되었습니다.');
-      res.redirect('/posts');
+      res.redirect('/');
     }
   });
 });
