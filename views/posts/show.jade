@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  .container
+    h1.page-header= post.title
+    p
+      span at #{moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')} 
+      | 
+      | (조회수 #{post.read})
+    p 도시 
+    p.well(style='white-space:pre;')= post.city
+    p 상세주소 
+    p.well(style='white-space:pre;')= post.address
+    p 숙소요금 
+    p.well(style='white-space:pre;')= post.fee
+    p 편의시설 
+    p.well(style='white-space:pre;')= post.facilities
+    p 내용
+    p.well(style='white-space:pre;')= post.rule
+
+    
+    a.btn.btn-default(href='/posts') 목록
