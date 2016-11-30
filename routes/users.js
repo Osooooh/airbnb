@@ -42,13 +42,35 @@ function validateForm(form, options) {
 
 /* GET users listing. */
 router.get('/', needAuth, function(req, res, next) {
+  if (req.session.admin === true) {
+    return res.redirect('/users/index'); 
+  }
+  res.render('users/admin', {messages: req.flash()});
+});
+
+router.post('/', function(req, res, next) {
+  if(req.body.password === '123456') {
+    req.session.admin = true;
+    return res.redirect('/users/index');
+  }
+
+  req.session.admin = false;
+  req.flash('danger', '비밀번호가 틀렸습니다.');
+  res.redirect('back');
+});
+
+router.get('/index', function(req, res, next) {
+  if(req.session.admin !== true) {
+    return res.redirect('/users');
+  }
   User.find({}, function(err, users) {
     if (err) {
       return next(err);
     }
-    res.render('users/index', {users: users});
+    res.render('users/index', {users: users}); //users정보들을 넘겨주기
   });
 });
+
 
 router.get('/new', function(req, res, next) {
   res.render('users/new', {messages: req.flash()});
@@ -119,7 +141,7 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/new', function(req, res, next) {
   var err = validateForm(req.body, {needPassword: true});
   if (err) {
     req.flash('danger', err);

@@ -91,7 +91,7 @@ router.put('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
    var newPost = new Post({
     read : req.body.read,
-    //name: req.body.name,
+    name: req.session.user.name, //로그인한 user의 이름 불러오기
     title : req.body.title,
     city : req.body.city,
     address : req.body.address,

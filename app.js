@@ -49,6 +49,7 @@ app.use('/bower_components',  express.static(path.join(__dirname, '/bower_compon
 
 app.use(function(req, res, next) {
   res.locals.currentUser = req.session.user;
+  res.locals.session = req.session;
   res.locals.flashMessages = req.flash();
   next();
 });

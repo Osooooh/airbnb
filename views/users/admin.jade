@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  .container
+    h1.page-header 회원 목록
+    form(action='/users', method='POST')
+        .form-group
+            label(for='password') 관리자 비밀번호
+            input.form-control(type='password', id='password', name='password', placeholder='Administrator Password')
+        p
+            button.btn.btn-default(type='submit') 확인
+    hr
+    p * 임의로 설정한 관리자 비밀번호는 123456입니다. *

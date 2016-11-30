@@ -2,18 +2,18 @@ extends ../layout
 
 block content
   .container
-    h1.page-header List
+    h1.page-header 숙소목록
 
     table.table.table-bordered
       thead
         tr
-          th 제목
-          th 도시
-          th 상세주소
-          //th 호스트
-          th 등록날짜
-          th 조회수
-          th
+          th(style='width:200px') 제목
+          th(style='width:150px') 도시
+          th(style='width:350px') 상세주소
+          th(style='width:130px') 호스트
+          th(style='width:160px') 등록날짜
+          th(style='width:60px') 조회수
+          th(style='width:100px')
       tbody
         each post in posts
           tr
@@ -22,7 +22,7 @@ block content
               a(href='/posts/#{post.id}')= post.title
             td= post.city
             td= post.address
-            //td= post.name
+            td= post.name
             td= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')
             td= post.read
             td
