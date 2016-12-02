@@ -1,0 +1,33 @@
+extends ../layout
+
+block content
+  .container
+    ul.nav.nav-tabs.nav-justified
+      li.active
+        a(data-toggle='tab', href='#profile') 회원정보
+      li
+        a(data-toggle='tab', href='#hosting') 등록한 숙소
+      li
+        a(data-toggle='tab', href='#books') 예약한 숙소
+      li
+        a(data-toggle='tab', href='#booksreq') 예약요청받은 숙소
+
+      .tab-content
+        #profile.tab-pane.active(role='tabpanel') 
+            h1.page-header 회원 정보
+
+            ul
+              li 이름 : #{user.name}      
+              li 이메일 : #{user.email}
+
+            hr
+            p
+              a.btn.btn-default(href='/users/') 목록
+              a.btn.btn-default(href='/users/#{user._id}/edit') 수정
+              a.btn.btn-default(href='/users/#{user._id}?_method=DELETE') 회원탈퇴
+        #hosting.tab-pane(role='tabpanel') 등록한 숙소
+         
+        #books.tab-pane(role='tabpanel') 예약한 숙소
+             
+        #booksreq.tab-pane(role='tabpanel') 예약요청받은 숙소
+

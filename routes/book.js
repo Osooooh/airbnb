@@ -14,4 +14,11 @@ router.get('/', function(req, res, next) {
     res.render('book', {posts: post}); // 모든 정보들을 다 보기 위해 posts로 넘겨준다.
   });
 });
+
+router.post('/', function(req, res, next) {
+  Post.find({city:req.body.city}, function(err, posts){
+    res.render('book', {posts:posts, city:req.body.city});
+  });
+});
+
 module.exports = router;

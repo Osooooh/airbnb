@@ -47,6 +47,7 @@ router.get('/:id/edit', function(req, res, next) {
   });
 });
 
+
 // 게시글 삭제
 router.delete('/:id', function(req, res, next) {
     Post.findOneAndRemove({_id: req.params.id}, function(err) { // 특정 게시물을 삭제하기 위해 findOneAndRemove를 쓴다.
@@ -64,7 +65,6 @@ router.put('/:id', function(req, res, next) {
       return next(err);
     }
 
-    //post.name = req.body.name,
     post.title = req.body.title;
     post.city = req.body.city;
     post.address = req.body.address;

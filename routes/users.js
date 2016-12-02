@@ -1,5 +1,6 @@
-var express = require('express'),
-    User = require('../models/User');
+var express = require('express');
+var User = require('../models/User');
+var Post = require('../models/Post');
 var router = express.Router();
 
 function needAuth(req, res, next) {
@@ -48,6 +49,11 @@ router.get('/', needAuth, function(req, res, next) {
   res.render('users/admin', {messages: req.flash()});
 });
 
+router.get('/profile', function(req, res, next) {
+  res.render('users/profile');
+});
+
+
 router.post('/', function(req, res, next) {
   if(req.body.password === '123456') {
     req.session.admin = true;
@@ -70,7 +76,6 @@ router.get('/index', function(req, res, next) {
     res.render('users/index', {users: users}); //users정보들을 넘겨주기
   });
 });
-
 
 router.get('/new', function(req, res, next) {
   res.render('users/new', {messages: req.flash()});
@@ -137,7 +142,7 @@ router.get('/:id', function(req, res, next) {
     if (err) {
       return next(err);
     }
-    res.render('users/show', {user: user});
+    res.render('users/profile', {user: user});
   });
 });
 
