@@ -2,14 +2,11 @@ extends ../layout
 
 block content
   .container
-    h1.page-header 숙소예약
+    h1.page-header
+        b 예약
     form(action = '/book', method='POST')
         table.table.table-striped.table-bordered
             tr(style='vertical-align:top')
-                td(style='width:350px; border-right:1px solid lightgrey; padding-right:12px; text-align:justify')
-                    .form-group
-                        label(for='city') 도시
-                        input.form-control(type='text', id='city', name='city', placeholder='City') 
                 td(style='width:350px; border-right:1px solid lightgrey; padding-right:12px; text-align:justify')
                     .form-group
                         label(for='checkin') 체크인
@@ -28,5 +25,4 @@ block content
                             option(value='5') 5
                 td(style='padding-left:10px')
                     div.form-actions
-                        button.btn.default(type='submit') 숙소 검색
-        
+                        button.btn.default(type='submit') 예약

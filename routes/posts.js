@@ -32,7 +32,7 @@ router.get('/:id', function(req, res, next) {
 			if (err) {
 				return next(err);
 			}
-    res.render('posts/show', {post: post});
+    res.render('show', {post: post});
   });
  });
 });
@@ -106,7 +106,7 @@ router.post('/', function(req, res, next) {
     if (err) {
       return next(err);
      } else {
-       res.redirect('/posts');
+       res.redirect('/book');
     }
   });
 });

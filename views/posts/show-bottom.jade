@@ -2,11 +2,11 @@ extends ../layout
 
 block content
   .container
-    h1.page-header= post.title
+    h1.page-header 
+      b 숙소정보
+    h3= post.title
     p
-      span at #{moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')} 
-      | 
-      | (조회수 #{post.read})
+
     p 도시 
     p.well(style='white-space:pre;')= post.city
     p 상세주소 

@@ -2,7 +2,8 @@ extends ../layout
 
 block content
   .container
-    h1.page-header 회원 목록
+    h1.page-header
+        b 회원 목록
     form(action='/users', method='POST')
         .form-group
             label(for='password') 관리자 비밀번호

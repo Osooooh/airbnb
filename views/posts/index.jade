@@ -2,40 +2,56 @@ extends ../layout
 
 block content
   .container
-    h1.page-header 숙소목록
+    h1
+      b 에어비앤비에서 호스팅할 수 있는 3가지 방법
+    .row
+      .col-md-4
+        .thumbnail
+          img(src='/images/img01.PNG', alt='IMG')
+          |           
+          .caption
+            
+            h3
+                b 여분의 공간을 호스팅하세요 
+            h4 산 속의 오두막집, 남는 방 등 회원님의 공간에 게스트를 맞이하고 수입을 누리세요.
+            p
+              a.btn.btn-default(href='/posts/new') 호스팅하기
+      .col-md-4
+        .thumbnail
+          img(src='/images/img02.PNG', alt='IMG')
+          |           
+          .caption
+            
+            h3
+                b 이웃을 위해 호스팅을 제공하세요
+            h4 호스팅을 할 여유공간이 없으세요? 지역 공동 호스트가 되어 다른 사람의 숙소를 대신 호스팅하며 수입을 올릴 수 있습니다.
+            p
+              a.btn.btn-default(href='/posts/new') 호스팅하기 
+      .col-md-4
+        .thumbnail
+          img(src='/images/img03.PNG', alt='IMG')
+          |           
+          .caption
+            
+            h3
+                b 특별한 트립을 호스팅하세요
+            h4 여행객을 위한 트립을 주최하고 회원님의 열정과 전문성 또는 회원님 지역만의 개성을 공유하세요.
+            p
+              a.btn.btn-default(href='/posts/new') 호스팅하기   
 
-    table.table.table-bordered
-        thead
-         tr
-          th(style='width:200px') 제목
-          th(style='width:150px') 도시
-          th(style='width:350px') 상세주소
-          th(style='width:130px') 호스트
-          th(style='width:160px') 등록날짜
-          th(style='width:60px') 조회수
-
-        tbody
-          each post in posts
-            tr
-
-              td
-                a(href='/posts/#{post.id}')= post.title
-              td= post.city
-              td= post.address
-              td= post.name
-              td= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')
-              td= post.read
-              
-
-      a.btn.btn-primary(href='/posts/new') 글쓰기
-
-      form#deleteForm(style='display:none', method="POST")
-        
-      script(type='text/javascript').
-        $(".delete").click(function(e) {
-        var id = $(e.currentTarget).data('id');
-        if (confirm('정말 삭제하시겠습니까?')) {
-          $("#deleteForm").attr('action', "/posts/" + id + "?_method=DELETE").submit();          
-        }
-        return false;
-        });
+    h1
+     b 호스팅의 장점                    
+    .container
+      .row
+        .col-md-4
+          h3
+            b 부가 수입
+          h4 집 수리에서 꿈꿔온 여행까지, 호스팅 수입으로 진짜 하고 싶은 일을 하세요.
+        .col-md-4
+          h3
+            b 호스트 지원
+          h4 유용한 팁과 필요한 도구를 지원 받고 전 세계 다른 호스트와 교류하세요.
+        .col-md-4
+          h3
+            b 유연성
+          h4 요금, 호스팅 시기 및 빈도 모두 호스트가 전적으로 결정합니다.

@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  .container
+    h1.page-header
+        b 도시검색
+    form(action = '/book', method='POST')
+        table.table.table-striped.table-bordered
+            tr(style='vertical-align:top')
+                td(style='border-right:1px solid lightgrey; padding-right:12px; text-align:justify')
+                    .form-group
+                        label(for='city') 도시
+                        input.form-control(type='text', id='city', name='city', placeholder='City') 
+
+                    .form-actions
+                        button.btn.default(type='submit') 검색
+        
