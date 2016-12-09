@@ -1,6 +1,7 @@
 var express = require('express');
 var User = require('../models/User');
 var Post = require('../models/Post');
+var Reserve = require('../models/Reserve');
 var router = express.Router();
 
 function needAuth(req, res, next) {
@@ -52,7 +53,6 @@ router.get('/', needAuth, function(req, res, next) {
 router.get('/profile', function(req, res, next) {
   res.render('users/profile');
 });
-
 
 router.post('/', function(req, res, next) {
   if(req.body.password === '123456') {
@@ -133,16 +133,34 @@ router.delete('/:id', function(req, res, next) {
       return next(err);
     }
     req.flash('success', '회원탈퇴가 완료되었습니다.');
-    res.redirect('/users');
+    res.redirect('/signin');
   });
 });
 
 router.get('/:id', function(req, res, next) {
+  if (!req.session.user) {
+      return next();
+  }
   User.findById(req.params.id, function(err, user) {
     if (err) {
       return next(err);
     }
-    res.render('users/profile', {user: user});
+    Post.find({name:req.session.user.name}, function(err, posts){
+      if (err) {
+        return next(err);
+      }
+      Reserve.find({incoming_requester:req.session.user.name}, function(err, requesters){
+        if (err) {
+          return next(err);
+        }
+        Reserve.find({outcoming_requester:req.session.user.name}, function(err, reservations){
+          if (err) {
+            return next(err);
+          }
+        res.render('users/profile', {user: user, posts:posts, requesters:requesters, reservations:reservations});
+        });
+      });
+    });
   });
 });
 

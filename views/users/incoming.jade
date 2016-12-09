@@ -1,0 +1,27 @@
+.container
+    h1.page-header 예약요청
+    
+    table.table.table-bordered
+      thead
+        tr
+          th 요청자
+          th 제목
+          th 체크인
+          th 체크아웃
+          th 인원수
+          th 현황
+          th
+      tbody
+        each requester in requesters
+          tr
+            td= requester.incoming_requester
+            td 
+              a(href='/posts/#{post.id}')=requester.title
+            td= moment(requester.checkin).format('YYYY-MM-DD')
+            td= moment(requester.checkout).format('YYYY-MM-DD')
+            td= requester.personnel
+            td= requester.situation
+            td
+              a.btn.btn-xs.btn-default(href='/users/#{requester._id}/accept') 수락
+              | 
+              a.btn.btn-xs.btn-default(href='/users/#{requester._id}/reject') 거절

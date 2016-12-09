@@ -5,41 +5,37 @@ block content
     h1.page-header 숙소목록
 
     table.table.table-bordered
-      thead
-        tr
+        thead
+         tr
           th(style='width:200px') 제목
           th(style='width:150px') 도시
           th(style='width:350px') 상세주소
           th(style='width:130px') 호스트
           th(style='width:160px') 등록날짜
           th(style='width:60px') 조회수
-          th(style='width:100px')
-      tbody
-        each post in posts
-          tr
 
-            td
-              a(href='/posts/#{post.id}')= post.title
-            td= post.city
-            td= post.address
-            td= post.name
-            td= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')
-            td= post.read
-            td
-              a.btn.btn-xs.btn-default(href='/posts/#{post.id}/edit') 수정
-              | 
-              a.btn.btn-xs.btn-default(data-id=post.id, class='delete') 삭제
+        tbody
+          each post in posts
+            tr
 
-    a.btn.btn-primary(href='/posts/new') 글쓰기
+              td
+                a(href='/posts/#{post.id}')= post.title
+              td= post.city
+              td= post.address
+              td= post.name
+              td= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')
+              td= post.read
+              
 
-    form#deleteForm(style='display:none', method="POST")
-            
-    script(type='text/javascript').
-      $(".delete").click(function(e) {
+      a.btn.btn-primary(href='/posts/new') 글쓰기
+
+      form#deleteForm(style='display:none', method="POST")
+        
+      script(type='text/javascript').
+        $(".delete").click(function(e) {
         var id = $(e.currentTarget).data('id');
         if (confirm('정말 삭제하시겠습니까?')) {
           $("#deleteForm").attr('action', "/posts/" + id + "?_method=DELETE").submit();          
         }
         return false;
-      });
-            
+        });

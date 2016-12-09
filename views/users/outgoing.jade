@@ -1,0 +1,25 @@
+.container
+    h1.page-header 예약한 숙소
+    
+    table.table.table-bordered
+      thead
+        tr
+          th 호스트
+          th 제목
+          th 체크인
+          th 체크아웃
+          th 인원수
+          th 현황
+          th
+      tbody
+        each reservation in reservations
+          tr
+            td= reservation.outgoing_requester
+            td 
+              a(href='/posts/#{post.id}')=reservation.title
+            td= moment(reservation.checkin).format('YYYY-MM-DD')
+            td= moment(reservation.checkout).format('YYYY-MM-DD')
+            td= reservation.personnel
+            td= reservation.situation
+            td
+              a.btn.btn-xs.btn-default(href='/books/#{reservation._id}?_method=DELETE') 삭제

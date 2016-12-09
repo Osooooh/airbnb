@@ -2,16 +2,25 @@
 var express = require('express');
 //models
 var Post = require("../models/Post");
+var Reserve = require("../models/Reserve");
 //module
 var router = express.Router();
 
-// 게시글 목록 화면
+function needAuth(req, res, next) {
+    if (req.session.user) {
+      next();
+    } else {
+      req.flash('danger', '로그인이 필요합니다.');
+      res.redirect('/signin');
+    }
+}
+
 router.get('/', function(req, res, next) {
-    Post.find({}, function(err, post) { // 모든 정보들을 다 알기 위해 find를 쓴다.
+    Post.find({}, function(err, post) { 
     if (err) {
       return next(err);
     }
-    res.render('book', {posts: post}); // 모든 정보들을 다 보기 위해 posts로 넘겨준다.
+    res.render('book', {posts: post});
   });
 });
 
@@ -20,5 +29,6 @@ router.post('/', function(req, res, next) {
     res.render('book', {posts:posts, city:req.body.city});
   });
 });
+
 
 module.exports = router;

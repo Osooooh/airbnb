@@ -16,11 +16,7 @@ block content
       .form-group
         label(for='password_confirmation') 비밀번호 확인
         input.form-control(type='password', id='password_confirmation', name='password_confirmation', placeholder='Password')
-      .form-group
-        label(for='types') 사용자 타입
-        select(id="types",name="types").form-control
-            option(value="traveler") traveler
-            option(value="host") host
+
       div.form-actions
         a.btn.btn-default(href='javascript:window.history.back();') 뒤로
         button.btn.btn-primary(type='submit') 회원가입
