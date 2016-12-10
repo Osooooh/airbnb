@@ -128,6 +128,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.delete('/:id', function(req, res, next) {
+  delete req.session.user;
   User.findOneAndRemove({_id: req.params.id}, function(err) {
     if (err) {
       return next(err);
@@ -149,15 +150,15 @@ router.get('/:id', function(req, res, next) {
       if (err) {
         return next(err);
       }
-      Reserve.find({incoming_requester:req.session.user.name}, function(err, requesters){
+      Reserve.find({host:req.session.user.name}, function(err, hosts){
         if (err) {
           return next(err);
         }
-        Reserve.find({outcoming_requester:req.session.user.name}, function(err, reservations){
+        Reserve.find({requester:req.session.user.name}, function(err, reservations){
           if (err) {
             return next(err);
           }
-        res.render('users/profile', {user: user, posts:posts, requesters:requesters, reservations:reservations});
+         res.render('users/profile', {user: user, posts:posts, hosts:hosts, reservations:reservations});
         });
       });
     });

@@ -4,7 +4,7 @@ block content
   .container
     h1.page-header
         b 예약
-    form(action = '/book', method='POST')
+    form(action = '/book/#{post.id}', method='POST')
         table.table.table-striped.table-bordered
             tr(style='vertical-align:top')
                 td(style='width:350px; border-right:1px solid lightgrey; padding-right:12px; text-align:justify')

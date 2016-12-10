@@ -2,8 +2,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var schema = new Schema({
-  incoming_requester: {type: String, required: true, trim: true}, //예약요청이 나에게 들어옴
-  outgoing_requester: {type: String, required: true, trim: true}, //내가 예약요청함
+  host: {type: String, required: true, trim: true}, //예약요청//host
+  requester: {type: String, required: true, trim: true}, //내가 예약
   title: {type: String, required: true, trim: true},
   checkin: {type: Date, default: Date.now},
   checkout: {type: Date, default: Date.now},

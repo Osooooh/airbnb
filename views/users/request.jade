@@ -1,0 +1,28 @@
+.container
+    h1.page-header 
+      b 예약요청받은 숙소
+    
+    table.table.table-bordered
+      thead
+        tr
+          th 요청자
+          th 숙소
+          th 체크인
+          th 체크아웃
+          th 인원수
+          th 현황
+          th
+      tbody
+        each host in hosts
+          tr
+            td= host.requester
+            td 
+              a(href='/posts/#{host.title}') 숙소확인
+            td= moment(host.checkin).format('YYYY-MM-DD')
+            td= moment(host.checkout).format('YYYY-MM-DD')
+            td= host.personnel
+            td= host.situation
+            td
+              a.btn.btn-xs.btn-default(href='/book/#{host._id}/accept') 수락
+              | 
+              a.btn.btn-xs.btn-default(href='/book/#{host._id}/reject') 거절

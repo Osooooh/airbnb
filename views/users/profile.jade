@@ -10,11 +10,12 @@ block content
       li
         a(data-toggle='tab', href='#books') 예약한 숙소
       li
-        a(data-toggle='tab', href='#booksreq') 예약요청
+        a(data-toggle='tab', href='#booksreq') 예약요청받은 숙소
 
       .tab-content
         #profile.tab-pane.active(role='tabpanel') 
-            h1.page-header 회원 정보
+            h1.page-header 
+              b 회원 정보
 
             ul
               li 이름 : #{user.name}      
@@ -24,10 +25,10 @@ block content
             p
               a.btn.btn-default(href='/users/') 목록
               a.btn.btn-default(href='/users/#{user._id}/edit') 수정
-              a.btn.btn-default(href='/users/#{user._id}?_method=DELETE') 회원탈퇴
+              a.btn.btn-default(href='/users/#{user._id}?_method=DELETE') 탈퇴
         #hosting.tab-pane(role='tabpanel')
           include ../users/mylist
         #books.tab-pane(role='tabpanel')
-          include ../users/outgoing
+          include ../users/reservation
         #booksreq.tab-pane(role='tabpanel')
-          include ../users/incoming
+          include ../users/request
