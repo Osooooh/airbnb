@@ -2,7 +2,8 @@ extends ../layout
 
 block content
   .container
-    h1.page-header 회원가입
+    h1.page-header 
+      b 회원가입
     form(action='/users/new', method='POST')
       .form-group
         label(for='name') 이름
@@ -10,6 +11,7 @@ block content
       .form-group
         label(for='email') 이메일 주소
         input.form-control(type='email', id='email', name='email', placeholder='Email')
+
       .form-group
         label(for='password') 비밀번호
         input.form-control(type='password', id='password', name='password', placeholder='Password')

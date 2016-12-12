@@ -7,6 +7,9 @@ block content
     h3= post.title
     p
 
+      each img in post.images
+        img.img-rounded.img-responsive(src=img)
+
     p 도시 
     p.well(style='white-space:pre;')= post.city
     p 상세주소 
@@ -18,5 +21,29 @@ block content
     p 내용
     p.well(style='white-space:pre;')= post.rule
 
+    hr
+    h3 
+      b 후기
+    table.table
+      tr
+        th 이름
+        th 내용
+        th 시간
+      each comment in comments
+        tr
+          td= comment.name
+          td= comment.content
+          td= moment(comment.createdAt).format('YYYY/MM/DD')
+  
+    form.form-inline(action='/posts/' + post._id + '/comments', method='POST')
+      .form-group
+        label.sr-only(for='name') name
+        input.form-control(name='name', size=25, placeholder='name')
+      .form-group
+        label.sr-only(for='content') content
+        input.form-control(name='content', size=100, placeholder='content')
+      button.btn.btn-info 댓글저장
     
+    hr
+
     a.btn.btn-default(href='/posts') 목록

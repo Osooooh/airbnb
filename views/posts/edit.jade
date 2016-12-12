@@ -9,7 +9,7 @@ block content
       h1.page-header
         b 숙소등록
 
-    form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts", method='POST')
+    form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts", method='POST', enctype="multipart/form-data")
       .form-group
         label(for='title') 제목
         input.form-control(type='text', id='title', name='title', placeholder='Title', value=post.title)
@@ -31,6 +31,9 @@ block content
       .form-group
         label(for='rule') 이용규칙
         textarea.form-control(id='rule', rows='10', name='rule', placeholder='Rule')= post.rule
+      .form-group
+        label(for='images') 숙소사진
+        input.form-control(type="file", name='photos')
 
       div.form-actions
         a.btn.btn-default(href='javascript:window.history.back();') 뒤로 

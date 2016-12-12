@@ -55,7 +55,7 @@ router.post('/:id', needAuth, function(req, res, next) {
 
 router.get('/:id/accept', function(req, res, next) {
    Reserve.findById(req.params.id, function (err, reserve){
-        reserve.situation = "수락"
+        reserve.situation = "수락";
         reserve.save(function(err) {
         if (err) {
             return next(err);
@@ -69,7 +69,7 @@ router.get('/:id/accept', function(req, res, next) {
 
 router.get('/:id/reject', function(req, res, next) {
    Reserve.findById(req.params.id, function (err, reserve){
-        reserve.situation = "거절"
+        reserve.situation = "거절";
         reserve.save(function(err) {
         if (err) {
             return next(err);

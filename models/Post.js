@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    moment = require('moment'),
     Schema = mongoose.Schema;
 
 var schema = new Schema({
@@ -10,6 +11,7 @@ var schema = new Schema({
   fee: {type: String, required: true, trim: true},
   facilities: {type: String, required: true, trim: true},
   rule: {type: String, required: true, trim: true},
+  images: [String],
   password: {type: String},
   createdAt: {type: Date, default: Date.now}
 }, {

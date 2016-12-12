@@ -1,9 +1,22 @@
 //controllers
 var express = require('express');
 //models
-var Post = require("../models/Post");
+var Post = require("../models/Post"),
+    multer  = require('multer'),
+    path = require('path'),
+    _ = require('lodash'),
+    fs = require('fs'),
+    upload = multer({ dest: 'tmp' }),
+    Comment = require('../models/comment');
 //module
 var router = express.Router();
+
+var mimetypes = {
+  "image/jpeg": "jpg",
+  "image/gif": "gif",
+  "image/png": "png"
+};
+
 
 // 게시글 목록 화면
 router.get('/', function(req, res, next) {
@@ -32,7 +45,13 @@ router.get('/:id', function(req, res, next) {
 			if (err) {
 				return next(err);
 			}
-    res.render('show', {post: post});
+      Comment.find({post: post.id}, function(err, comments) {
+        if (err) {
+          return next(err);
+        }
+        res.render('show', {post: post, comments: comments});
+    //res.render('show', {post: post});
+      });
   });
  });
 });
@@ -44,6 +63,26 @@ router.get('/:id/edit', function(req, res, next) {
       return next(err);
     }
     res.render('posts/edit', {post: post});
+  });
+});
+
+router.post('/:id/comments', function(req, res, next) {
+  var comment = new Comment({
+    post: req.params.id,
+    name: req.body.name,
+    content: req.body.content
+  });
+
+  comment.save(function(err) {
+    if (err) {
+      return next(err);
+    }
+    Post.findByIdAndUpdate(req.params.id, {$inc: {numComment: 1}}, function(err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/posts/' + req.params.id);
+    });
   });
 });
 
@@ -88,7 +127,21 @@ router.put('/:id', function(req, res, next) {
 });
 
 // 게시글 작성
-router.post('/', function(req, res, next) {
+router.post('/', upload.array('photos'), function(req, res, next) {
+  var dest = path.join(__dirname, '../public/images/');
+  var images = [];
+  if (req.files && req.files.length > 0) {
+    _.each(req.files, function(file) {
+      var ext = mimetypes[file.mimetype];
+      if (!ext) {
+        return;
+      }
+      var filename = file.filename + "." + ext;
+      fs.renameSync(file.path, dest + filename);
+      images.push("/images/" + filename);
+    });
+  }
+
    var newPost = new Post({
     read : req.body.read,
     name: req.session.user.name, //로그인한 user의 이름 불러오기
@@ -98,6 +151,7 @@ router.post('/', function(req, res, next) {
     fee : req.body.fee,
     facilities : req.body.facilities,
     rule : req.body.rule,
+    images: images,
     createdAt : req.body.createdAt, // new!
    });
    newPost.password = req.body.password;
